@@ -1,0 +1,97 @@
+# HG changeset patch
+# Parent 990e4de7fb3eae7574f898681ce605533402acdf
+Add cmake install targets
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,5 +14,6 @@
+ include_directories(include/)
+ 
+ add_subdirectory(library)
++add_subdirectory(include)
+ add_subdirectory(tests)
+ add_subdirectory(programs)
+diff --git a/include/CMakeLists.txt b/include/CMakeLists.txt
+new file mode 100644
+--- /dev/null
++++ b/include/CMakeLists.txt
+@@ -0,0 +1,5 @@
++FILE(GLOB headers "polarssl/*.h")
++
++INSTALL(FILES ${headers}
++        DESTINATION include/polarssl
++        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+diff --git a/library/CMakeLists.txt b/library/CMakeLists.txt
+--- a/library/CMakeLists.txt
++++ b/library/CMakeLists.txt
+@@ -26,3 +26,7 @@
+      x509parse.c
+      xtea.c
+ )
++
++INSTALL(TARGETS polarssl
++        DESTINATION ${LIB_INSTALL_DIR}
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+diff --git a/programs/aes/CMakeLists.txt b/programs/aes/CMakeLists.txt
+--- a/programs/aes/CMakeLists.txt
++++ b/programs/aes/CMakeLists.txt
+@@ -1,2 +1,5 @@
+ add_executable(aescrypt2 aescrypt2.c)
+ target_link_libraries(aescrypt2 polarssl)
++INSTALL(TARGETS aescrypt2
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+diff --git a/programs/hash/CMakeLists.txt b/programs/hash/CMakeLists.txt
+--- a/programs/hash/CMakeLists.txt
++++ b/programs/hash/CMakeLists.txt
+@@ -9,3 +9,7 @@
+ 
+ add_executable(sha2sum sha2sum.c)
+ target_link_libraries(sha2sum polarssl)
++
++INSTALL(TARGETS hello md5sum sha1sum sha2sum
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+diff --git a/programs/pkey/CMakeLists.txt b/programs/pkey/CMakeLists.txt
+--- a/programs/pkey/CMakeLists.txt
++++ b/programs/pkey/CMakeLists.txt
+@@ -18,3 +18,7 @@
+ 
+ add_executable(rsa_verify rsa_verify.c)
+ target_link_libraries(rsa_verify polarssl)
++
++INSTALL(TARGETS dh_client dh_genprime dh_server mpi_demo rsa_genkey rsa_sign rsa_verify
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+diff --git a/programs/ssl/CMakeLists.txt b/programs/ssl/CMakeLists.txt
+--- a/programs/ssl/CMakeLists.txt
++++ b/programs/ssl/CMakeLists.txt
+@@ -6,3 +6,8 @@
+ 
+ add_executable(ssl_server ssl_server.c)
+ target_link_libraries(ssl_server polarssl)
++
++INSTALL(TARGETS ssl_client1 ssl_client2 ssl_server
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
++
+diff --git a/programs/test/CMakeLists.txt b/programs/test/CMakeLists.txt
+--- a/programs/test/CMakeLists.txt
++++ b/programs/test/CMakeLists.txt
+@@ -10,3 +10,6 @@
+ add_executable(ssl_cert_test ssl_cert_test.c)
+ target_link_libraries(ssl_cert_test polarssl)
+ 
++INSTALL(TARGETS selftest benchmark ssl_test ssl_cert_test
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+diff --git a/programs/x509/CMakeLists.txt b/programs/x509/CMakeLists.txt
+--- a/programs/x509/CMakeLists.txt
++++ b/programs/x509/CMakeLists.txt
+@@ -1,2 +1,5 @@
+ add_executable(cert_app cert_app.c)
+ target_link_libraries(cert_app polarssl)
++INSTALL(TARGETS cert_app
++        DESTINATION "bin"
++        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
