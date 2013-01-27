@@ -1,16 +1,17 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
+Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
 Version:	0.14.3
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-URL:		http://www.polarssl.org/
 Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
 # Source0-md5:	f1b2fe9087ab64d7ea40a276a3628583
 Patch1:		cmake-with-install.patch
 Patch2:		cmake-shared.patch
 Patch3:		cmake-doxygen.patch
-BuildRequires:	cmake
+URL:		http://www.polarssl.org/
+BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -20,14 +21,25 @@ library written in C. PolarSSL makes it easy for developers to include
 cryptographic and SSL/TLS capabilities in their (embedded)
 applications with as little hassle as possible.
 
+%description -l pl.UTF-8
+PolarSSL to lekka, mająca otwarte źródła biblioteka kryptograficzna
+oraz SSL/TLS napisana w C. PolarSSL ułatwia programistom dołączanie
+funkcji kryptograficznych i SSL/TLS do swoich (wbudowanych) aplikacji
+przy jak najmniejszym narzucie.
+
 %package devel
 Summary:	Development files for PolarSSL
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki PolarSSL
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
-%description    devel
-This package contains libraries and header files for developing
-applications that use PolarSSL
+%description devel
+This package contains the header files for developing applications
+that use PolarSSL.
+
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji
+wykorzystujących bibliotekę PolarSSL.
 
 %prep
 %setup -q
@@ -41,8 +53,9 @@ install -d build
 cd build
 %cmake .. \
 	-DUSE_SHARED_POLARSSL_LIBRARY:BOOL=1
-%{__make} VERBOSE=1
-%{__make} VERBOSE=1 apidoc
+
+%{__make} 
+%{__make} apidoc
 
 %if %{with tests}
 # Tests are not stable on 64-bit
@@ -51,8 +64,8 @@ ctest --output-on-failure
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
-	-C build \
+
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}
@@ -68,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libpolarssl.so.*.*.*
-%ghost %{_libdir}/libpolarssl.so.1
+%attr(755,root,root) %ghost %{_libdir}/libpolarssl.so.1
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/aescrypt2
 %attr(755,root,root) %{_libdir}/%{name}/benchmark
@@ -94,5 +107,5 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc include/apidoc/*
-%{_libdir}/libpolarssl.so
+%attr(755,root,root) %{_libdir}/libpolarssl.so
 %{_includedir}/%{name}
