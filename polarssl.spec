@@ -1,18 +1,16 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
-Version:	0.14.3
+Version:	1.2.4
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
-# Source0-md5:	f1b2fe9087ab64d7ea40a276a3628583
-Patch1:		cmake-with-install.patch
-Patch2:		cmake-shared.patch
-Patch3:		cmake-doxygen.patch
+# Source0-md5:	f23fc73b0c5ef1c51294c20f3ea0dcb0
 URL:		http://www.polarssl.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,10 +41,6 @@ wykorzystujących bibliotekę PolarSSL.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%undos ChangeLog
 
 %build
 install -d build
@@ -81,17 +75,27 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libpolarssl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpolarssl.so.1
+%attr(755,root,root) %ghost %{_libdir}/libpolarssl.so.2
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/aescrypt2
 %attr(755,root,root) %{_libdir}/%{name}/benchmark
 %attr(755,root,root) %{_libdir}/%{name}/cert_app
+%attr(755,root,root) %{_libdir}/%{name}/crl_app
+%attr(755,root,root) %{_libdir}/%{name}/crypt_and_hash
 %attr(755,root,root) %{_libdir}/%{name}/dh_client
 %attr(755,root,root) %{_libdir}/%{name}/dh_genprime
 %attr(755,root,root) %{_libdir}/%{name}/dh_server
+%attr(755,root,root) %{_libdir}/%{name}/gen_entropy
+%attr(755,root,root) %{_libdir}/%{name}/gen_random_ctr_drbg
+%attr(755,root,root) %{_libdir}/%{name}/gen_random_havege
+%attr(755,root,root) %{_libdir}/%{name}/generic_sum
 %attr(755,root,root) %{_libdir}/%{name}/hello
+%attr(755,root,root) %{_libdir}/%{name}/key_app
 %attr(755,root,root) %{_libdir}/%{name}/md5sum
 %attr(755,root,root) %{_libdir}/%{name}/mpi_demo
+%attr(755,root,root) %{_libdir}/%{name}/o_p_test
+%attr(755,root,root) %{_libdir}/%{name}/rsa_decrypt
+%attr(755,root,root) %{_libdir}/%{name}/rsa_encrypt
 %attr(755,root,root) %{_libdir}/%{name}/rsa_genkey
 %attr(755,root,root) %{_libdir}/%{name}/rsa_sign
 %attr(755,root,root) %{_libdir}/%{name}/rsa_verify
@@ -101,11 +105,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/ssl_cert_test
 %attr(755,root,root) %{_libdir}/%{name}/ssl_client1
 %attr(755,root,root) %{_libdir}/%{name}/ssl_client2
+%attr(755,root,root) %{_libdir}/%{name}/ssl_fork_server
+%attr(755,root,root) %{_libdir}/%{name}/ssl_mail_client
 %attr(755,root,root) %{_libdir}/%{name}/ssl_server
 %attr(755,root,root) %{_libdir}/%{name}/ssl_test
+%attr(755,root,root) %{_libdir}/%{name}/strerror
 
 %files devel
 %defattr(644,root,root,755)
-%doc include/apidoc/*
+%doc apidoc/*
 %attr(755,root,root) %{_libdir}/libpolarssl.so
 %{_includedir}/%{name}
