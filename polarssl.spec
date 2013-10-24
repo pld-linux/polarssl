@@ -1,12 +1,12 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
-Version:	1.2.8
+Version:	1.3.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
-# Source0-md5:	985151639b1ca037293f06da44fbc6bc
+# Source0-md5:	e6ee020496f315254f178c672132218d
 URL:		http://www.polarssl.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
@@ -75,17 +75,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libpolarssl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpolarssl.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpolarssl.so.5
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/aescrypt2
 %attr(755,root,root) %{_libdir}/%{name}/benchmark
 %attr(755,root,root) %{_libdir}/%{name}/cert_app
+%attr(755,root,root) %{_libdir}/%{name}/cert_req
+%attr(755,root,root) %{_libdir}/%{name}/cert_write
 %attr(755,root,root) %{_libdir}/%{name}/crl_app
 %attr(755,root,root) %{_libdir}/%{name}/crypt_and_hash
 %attr(755,root,root) %{_libdir}/%{name}/dh_client
 %attr(755,root,root) %{_libdir}/%{name}/dh_genprime
 %attr(755,root,root) %{_libdir}/%{name}/dh_server
 %attr(755,root,root) %{_libdir}/%{name}/gen_entropy
+%attr(755,root,root) %{_libdir}/%{name}/gen_key
 %attr(755,root,root) %{_libdir}/%{name}/gen_random_ctr_drbg
 %attr(755,root,root) %{_libdir}/%{name}/gen_random_havege
 %attr(755,root,root) %{_libdir}/%{name}/generic_sum
@@ -94,6 +97,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/md5sum
 %attr(755,root,root) %{_libdir}/%{name}/mpi_demo
 %attr(755,root,root) %{_libdir}/%{name}/o_p_test
+%attr(755,root,root) %{_libdir}/%{name}/pem2der
+%attr(755,root,root) %{_libdir}/%{name}/pk_decrypt
+%attr(755,root,root) %{_libdir}/%{name}/pk_encrypt
+%attr(755,root,root) %{_libdir}/%{name}/pk_sign
+%attr(755,root,root) %{_libdir}/%{name}/pk_verify
+%attr(755,root,root) %{_libdir}/%{name}/req_app
 %attr(755,root,root) %{_libdir}/%{name}/rsa_decrypt
 %attr(755,root,root) %{_libdir}/%{name}/rsa_encrypt
 %attr(755,root,root) %{_libdir}/%{name}/rsa_genkey
