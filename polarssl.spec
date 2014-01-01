@@ -1,12 +1,12 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
-Version:	1.3.2
+Version:	1.3.3
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
-# Source0-md5:	1a61ef396c6e1a14ebbddfa23ca101f3
+# Source0-md5:	7db1c73c806d5f4d301e0808ba1b08b4
 URL:		http://www.polarssl.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
@@ -48,7 +48,7 @@ cd build
 %cmake .. \
 	-DUSE_SHARED_POLARSSL_LIBRARY:BOOL=1
 
-%{__make} 
+%{__make}
 %{__make} apidoc
 
 %if %{with tests}
@@ -116,6 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/ssl_client2
 %attr(755,root,root) %{_libdir}/%{name}/ssl_fork_server
 %attr(755,root,root) %{_libdir}/%{name}/ssl_mail_client
+%attr(755,root,root) %{_libdir}/%{name}/ssl_pthread_server
 %attr(755,root,root) %{_libdir}/%{name}/ssl_server
 %attr(755,root,root) %{_libdir}/%{name}/ssl_test
 %attr(755,root,root) %{_libdir}/%{name}/strerror
