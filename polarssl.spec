@@ -2,7 +2,7 @@ Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
 Version:	1.3.4
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
@@ -46,6 +46,7 @@ wykorzystujących bibliotekę PolarSSL.
 install -d build
 cd build
 %cmake .. \
+	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DUSE_SHARED_POLARSSL_LIBRARY:BOOL=1
 
 %{__make}
