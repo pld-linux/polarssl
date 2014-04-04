@@ -1,13 +1,13 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
-Version:	1.3.4
-Release:	2
+Version:	1.3.5
+Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
-# Source0-md5:	30a75c5f171be49f805f3bf64a0af054
-URL:		http://www.polarssl.org/
+Source0:	https://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
+# Source0-md5:	2527c8e632d533ec34e3c0786ac99e55
+URL:		https://polarssl.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
 BuildRequires:	rpmbuild(macros) >= 1.605
@@ -38,6 +38,18 @@ that use PolarSSL.
 %description devel -l pl.UTF-8
 Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji
 wykorzystujących bibliotekę PolarSSL.
+
+%package static
+Summary:	Static PolarSSL library
+Summary(pl.UTF-8):	Statyczna biblioteka PolarSSL
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static PolarSSL library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka PolarSSL.
 
 %prep
 %setup -q
@@ -127,3 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc apidoc/*
 %attr(755,root,root) %{_libdir}/libpolarssl.so
 %{_includedir}/%{name}
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libpolarssl.a
