@@ -1,12 +1,12 @@
 Summary:	Light-weight cryptographic and SSL/TLS library
 Summary(pl.UTF-8):	Lekka biblioteka kryptograficzna oraz SSL/TLS
 Name:		polarssl
-Version:	1.3.6
+Version:	1.3.7
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://polarssl.org/code/releases/%{name}-%{version}-gpl.tgz
-# Source0-md5:	1245884d3e73150cfcc196f91de2b5c4
+# Source0-md5:	b656e4c83ee94f93d19eb0832fd7f976
 URL:		https://polarssl.org/
 BuildRequires:	cmake >= 2.6
 BuildRequires:	doxygen
